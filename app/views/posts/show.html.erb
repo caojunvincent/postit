@@ -6,19 +6,27 @@
 <%= render @post.categories %>
 </p>
 
-<%= render 'shared/content_title', title: @post.title %>
+<% header = link_to('All Posts', posts_path) + " &raquo; #{@post.title}".html_safe %>
+<%= render 'shared/content_title', title: header %>
 
+<p>
+<%= link_to @post.url, fixed_url(@post.url) %>
+</p>
 <p>
 <%= @post.description %>
 </p>
 <hr />
 
 <h4>Create a comment</h4>
+<%= render 'shared/errors', obj: @comment %>
+<div class='well'>
 <%= form_for [@post, @comment] do |f| %>
-  <%= f.text_area :body %>
-  <br />
-  <%= f.submit "Create a comment", class: "btn btn-primary" %>
+  <div class='control-group'>
+  <%= f.text_area :body, rows: 5 %>
+</div>
+<%= f.submit "Create a comment", class: "btn btn-primary" %>
 <% end %>
+</div>
 
 <h5>All Comments</h5>
 <% @comments.each do |comment| %>

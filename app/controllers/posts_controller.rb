@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   # 2. redirect based on some condition
 
   def index
-    @posts = Post.all.order("id DESC")
+    @posts = Post.includes(:comments, :creator, :categories).order("id DESC")
   end
 
   def show
@@ -17,6 +17,7 @@ class PostsController < ApplicationController
   end
 
   def create
+    binding.pry
     @post = Post.new(post_params)
     @post.creator = User.first # TODO: change once we have authentication
 
@@ -43,7 +44,10 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :url, :description)
+    params.require(:post).permit(:title, 
+                                 :url, 
+                                 :description, 
+                                 category_ids: [])
   end
 
   def set_post
