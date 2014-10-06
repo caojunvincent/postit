@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       flash[:notice] = "You've logged in"
       redirect_to root_path
     else
-      flash[:erroe] = "There is something wrong with your username or password"
+      flash[:error] = "There is something wrong with your username or password"
       redirect_to login_path
     end
   end

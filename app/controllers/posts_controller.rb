@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update]
+  before_action :require_user, except: [:index, :show]
   # 1. set up instance variable for action
   # 2. redirect based on some condition
 
@@ -19,7 +20,7 @@ class PostsController < ApplicationController
   def create
     binding.pry
     @post = Post.new(post_params)
-    @post.creator = User.first # TODO: change once we have authentication
+    @post.creator = current_user #User.first # TODO: change once we have authentication
 
     if @post.save
       flash[:notice] = 'Your post was created'
@@ -53,4 +54,5 @@ class PostsController < ApplicationController
   def set_post
     @post = Post.find(params[:id])
   end
+
 end
