@@ -20,7 +20,7 @@ class PostsController < ApplicationController
   def create
     binding.pry
     @post = Post.new(post_params)
-    @post.creator = current_user #User.first # TODO: change once we have authentication
+    @post.creator = current_user
 
     if @post.save
       flash[:notice] = 'Your post was created'

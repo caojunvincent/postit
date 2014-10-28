@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
 
-  before_action :require_user, except: [:index, :show]
+  before_action :require_user, only: [:new, :create]#except: [:index, :show]
 
   def create
     @post = Post.find(params[:post_id])
