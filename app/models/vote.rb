@@ -5,5 +5,5 @@ class Vote < ActiveRecord::Base
   #validates :creator, uniqueness: true, scope: :voteable
   #validates_uniqueness_of :creator, scope: :voteable
 
-  validates :creator, uniqueness: { scope: :voteable }
+  validates :creator, uniqueness: { scope: [:voteable_type, :voteable_id] }
 end

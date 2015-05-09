@@ -10,7 +10,7 @@ class Comment < ActiveRecord::Base
   end
 
   def up_votes
-    self.votes.where(vote: :true).size
+    self.votes.where(vote: true).size
   end
 
   def down_votes
