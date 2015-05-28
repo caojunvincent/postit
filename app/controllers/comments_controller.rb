@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
   before_action :require_user #, only: [:new, :create, :vote]#except: [:index, :show]
 
   def create
-    @post = Post.find(params[:post_id])
+    @post = Post.find_by(slug: params[:post_id])
     @comment = @post.comments.build(comment_params)
     @comment.creator = current_user #User.first # TODO: change once we have authentication
 
