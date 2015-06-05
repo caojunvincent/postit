@@ -6,5 +6,16 @@ class Category < ActiveRecord::Base
                    length: {minimum: 5},
                    uniqueness: true
 
+  before_save :generate_slug
+
+  def to_param
+    self.slug
+  end
+
+  private
+  def generate_slug
+    self.slug = self.name.gsub(" ", "-").downcase
+  end
+
 
 end

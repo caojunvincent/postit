@@ -5,6 +5,8 @@ class Comment < ActiveRecord::Base
 
   validates :body, presence: true
 
+  before_save :generate_slug
+
   def total_votes
     up_votes - down_votes
   end
@@ -16,4 +18,5 @@ class Comment < ActiveRecord::Base
   def down_votes
     self.votes.where(vote: false).size
   end
+
 end
